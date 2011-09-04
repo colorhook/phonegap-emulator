@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>PhoneGap Emulator Example</title>
+</head>
+<body>
+	<h1>PhoneGap Emulator Example</h1>
+<script>
+ExternalInterface.addCommand("customCommand", "../example/command/customCommand.js");
+function buttonClicked(){
+	window.onSuccess = function(result){
+		alert('onSuccess:'+result);
+	}
+	window.onFailure = function(result){
+		alert('onFailure: '+result);
+	}
+	var callOption = {
+		command: 'customCommand',
+		args: [1, 2, 3],
+		onSuccess: 'onSuccess',
+		onFailure: 'onFailure'
+	}
+	
+	try{
+		ExternalInterface.call(JSON.stringify(callOption));
+	}catch(e){
+		alert(e);
+	}
+}
+
+</script>
+	<button onclick="buttonClicked()">click me</button>
+</body>
+</html>

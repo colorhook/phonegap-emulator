@@ -1,0 +1,62 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+from PyQt4 import QtCore, QtGui, QtWebKit
+
+class SimpleBrowserUI(object):
+
+    def setup(self, SimpleBrowser):
+        SimpleBrowser.setObjectName("SimpleBrowser")
+        SimpleBrowser.resize(800, 500)
+        self.verticalLayout = QtGui.QVBoxLayout(SimpleBrowser)
+        self.verticalLayout.setObjectName("verticalLayout")
+        self.horizontalLayout = QtGui.QHBoxLayout()
+        self.horizontalLayout.setObjectName("horizontalLayout")
+        self.back = QtGui.QPushButton(SimpleBrowser)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("assets/back.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.back.setIcon(icon)
+        self.back.setObjectName("back")
+        self.horizontalLayout.addWidget(self.back)
+        self.next = QtGui.QPushButton(SimpleBrowser)
+        self.next.setEnabled(True)
+        self.next.setLayoutDirection(QtCore.Qt.RightToLeft)
+        icon1 = QtGui.QIcon()
+        icon1.addPixmap(QtGui.QPixmap("assets/next.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.next.setIcon(icon1)
+        self.next.setObjectName("next")
+        self.horizontalLayout.addWidget(self.next)
+        self.stop = QtGui.QPushButton(SimpleBrowser)
+        icon2 = QtGui.QIcon()
+        icon2.addPixmap(QtGui.QPixmap("assets/stop.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.stop.setIcon(icon2)
+        self.stop.setObjectName("stop")
+        self.horizontalLayout.addWidget(self.stop)
+        self.reload = QtGui.QPushButton(SimpleBrowser)
+        icon3 = QtGui.QIcon()
+        icon3.addPixmap(QtGui.QPixmap("assets/reload.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.reload.setIcon(icon3)
+        self.reload.setObjectName("reload")
+        self.horizontalLayout.addWidget(self.reload)
+        self.url = QtGui.QLineEdit(SimpleBrowser)
+        self.url.setObjectName("url")
+        self.horizontalLayout.addWidget(self.url)
+        self.verticalLayout.addLayout(self.horizontalLayout)
+        self.webView = QtWebKit.QWebView(SimpleBrowser)
+        self.webView.setUrl(QtCore.QUrl("about:blank"))
+        self.webView.setObjectName("webView")
+        self.verticalLayout.addWidget(self.webView)
+
+        self.translate(SimpleBrowser)
+        QtCore.QMetaObject.connectSlotsByName(SimpleBrowser)
+
+    def translate(self, SimpleBrowser):
+        SimpleBrowser.setWindowTitle(QtGui.QApplication.translate("SimpleBrowser", "Form", None, QtGui.QApplication.UnicodeUTF8))
+        self.back.setToolTip(QtGui.QApplication.translate("SimpleBrowser", "Back", None, QtGui.QApplication.UnicodeUTF8))
+        #self.back.setText(QtGui.QApplication.translate("SimpleBrowser", "Back", None, QtGui.QApplication.UnicodeUTF8))
+        self.next.setToolTip(QtGui.QApplication.translate("SimpleBrowser", "Next", None, QtGui.QApplication.UnicodeUTF8))
+        #self.next.setText(QtGui.QApplication.translate("SimpleBrowser", "Next", None, QtGui.QApplication.UnicodeUTF8))
+        self.stop.setToolTip(QtGui.QApplication.translate("SimpleBrowser", "Stop", None, QtGui.QApplication.UnicodeUTF8))
+        #self.stop.setText(QtGui.QApplication.translate("SimpleBrowser", "Stop", None, QtGui.QApplication.UnicodeUTF8))
+        self.reload.setToolTip(QtGui.QApplication.translate("SimpleBrowser", "Reload", None, QtGui.QApplication.UnicodeUTF8))
+        #self.reload.setText(QtGui.QApplication.translate("SimpleBrowser", "Reload", None, QtGui.QApplication.UnicodeUTF8))

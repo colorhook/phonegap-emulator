@@ -1,1 +1,1 @@
-return 'hello';
+console.log("custom command result: "+process.argv.slice(2).join('-'));

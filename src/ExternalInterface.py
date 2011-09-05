@@ -17,7 +17,7 @@ class ExternalInterface(QtCore.QObject):
 	output = {}
 	output = {"onSuccess": data["onSuccess"], "onFailure": data["onFailure"]}
 	if self.commandMap.has_key(command):
-		result = self.executeNode(self.commandMap.get(command))
+		result = self.executeNode(self.commandMap.get(command), data["args"])
 		if data.has_key("onSuccess"):
 			self.evaluateJavaScript(data["onSuccess"], result)
 	else:
@@ -27,13 +27,16 @@ class ExternalInterface(QtCore.QObject):
 	
     def evaluateJavaScript(self, func, data):
 	script = func+"('"+data+"')"
-	print script
 	self.webView.page().mainFrame().evaluateJavaScript(script)
 
-    def executeNode(self, path, *arg):
-	proc = subprocess.Popen(args='node ' + path, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True)
+    def executeNode(self, path, arg):
+	argv = ""
+	for el in arg:
+		argv += " "+str(el)
+	proc = subprocess.Popen(args='node ' + path + argv, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True)
 	out, err = proc.communicate()
-	return out;
+	
+	return out.strip();
 	
     @QtCore.pyqtSignature("QString,QString")
     def addCommand(self, command, nodeFilePath):

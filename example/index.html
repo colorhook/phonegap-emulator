@@ -10,14 +10,14 @@
 ExternalInterface.addCommand("customCommand", "../example/command/customCommand.js");
 function buttonClicked(){
 	window.onSuccess = function(result){
-		alert('onSuccess:'+result);
+		alert(result);
 	}
-	window.onFailure = function(result){
-		alert('onFailure: '+result);
+	window.onFailure = function(fail){
+		alert(fail);
 	}
 	var callOption = {
 		command: 'customCommand',
-		args: [1, 2, 3],
+		args: ['a', 'b', 'c'],
 		onSuccess: 'onSuccess',
 		onFailure: 'onFailure'
 	}
